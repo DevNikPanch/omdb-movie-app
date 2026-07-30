@@ -1,4 +1,4 @@
-# 🎬 FilmHub — Веб-приложение для поиска и трекинга фильмов
+# 🎬 omdb-movie-app — Веб-приложение для поиска и трекинга фильмов
 
 ![Vue 3](https://img.shields.io/badge/Vue.js-3.x-4fc08d?style=flat&logo=vuedotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat&logo=typescript&logoColor=white)
