@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from './components/TheHeader.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <TheHeader />
 </template>

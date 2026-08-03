@@ -1,0 +1,8 @@
+// 1. Переменные (флаг as * пробрасывает их в область видимости)
+@use './abstract/variables'as *;
+
+// 2. Сброс / Нормализация
+@use './base/normalize';
+
+// 3. Компоненты (Vite автоматически найдет файл _header.scss)
+@use './components/header';
