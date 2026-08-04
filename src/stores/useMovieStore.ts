@@ -26,7 +26,6 @@ export const useMovieStore = defineStore('movie', () => {
                 movies.value = [];
                 error.value = data.Error || 'Фильмы не найдены';
             }
-            console.log(data);
         } catch (err) {
             error.value = 'Не удалось загрузить данные. Проверьте соединение.';
             console.error(err);
