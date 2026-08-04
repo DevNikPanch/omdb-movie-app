@@ -4,5 +4,6 @@
 // 2. Сброс / Нормализация
 @use './base/normalize';
 
-// 3. Компоненты (Vite автоматически найдет файл _header.scss)
+// 3. Компоненты
 @use './components/header';
+@use './components/card';
