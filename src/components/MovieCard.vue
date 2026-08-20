@@ -11,7 +11,7 @@ const posterUrl = computed(() => {
 })
 </script>
 <template>
-    <article class="movie-card">
+    <RouterLink :to="{ name: 'movie-detail', params: { id: movie.imdbID } }" class="movie-card">
         <div class="movie-card__container">
             <div class="movie-card__poster">
                 <img class="movie-card__img" :src="posterUrl" :alt="movie.Title">
@@ -24,5 +24,5 @@ const posterUrl = computed(() => {
                 </div>
             </div>
         </div>
-    </article>
+    </RouterLink>
 </template>
