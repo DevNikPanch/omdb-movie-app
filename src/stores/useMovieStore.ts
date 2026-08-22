@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { Movie, SearchResponse } from '../types/movie';
+import type { Movie, MovieDetail, SearchResponse } from '../types/movie';
 
 export const useMovieStore = defineStore('movie', () => {
     const movies = ref<Movie[]>([]);
     const isLoading = ref<boolean>(false);
+
+    const currentMovie = ref<MovieDetail | null>(null);
+
     const error = ref<string | null>(null);
 
     async function searchMovies(query: string) {
@@ -33,5 +36,31 @@ export const useMovieStore = defineStore('movie', () => {
             isLoading.value = false;
         }
     }
-    return { movies, isLoading, error, searchMovies };
+
+    async function fetchMovieById(id: string) {
+        currentMovie.value = null;
+        if (!id.trim()) return;
+        error.value = null;
+        isLoading.value = true;
+
+        try {
+            const response = await fetch(`https://www.omdbapi.com/?apikey=e6867c0a&i=${id}`);
+            if (!response.ok) throw new Error('Ошибка сети!');
+
+            const data: MovieDetail = await response.json();
+
+            if (data.Response === 'True') {
+                currentMovie.value = data;
+            } else {
+                currentMovie.value = null;
+                error.value = data.Error || 'Фильмы не найдены';
+            }
+        } catch (err) {
+            error.value = 'Не удалось загрузить данные. Проверьте соединение.';
+            console.error(err);
+        } finally {
+            isLoading.value = false;
+        }
+    }
+    return { movies, isLoading, error, searchMovies, fetchMovieById, currentMovie };
 });
