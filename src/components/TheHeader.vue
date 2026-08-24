@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useMovieStore } from '../stores/useMovieStore';
 
 const movieStore = useMovieStore();
 
-const searchQueryText = ref<string>('');
-
 const handleSearch = () => {
-    movieStore.searchMovies(searchQueryText.value);
+    movieStore.searchMovies(movieStore.searchQuery);
 }
 
 </script>
@@ -18,8 +15,15 @@ const handleSearch = () => {
             <h1 class="header__logo">Film<span>Hub</span></h1>
 
             <form class="header__search" @submit.prevent="handleSearch">
-                <input v-model="searchQueryText" type="text" placeholder="Поиск фильмов (например, Matrix)..."
-                    class="header__input" />
+                <div class="header__search-field">
+                    <input v-model="movieStore.searchQuery" type="text"
+                        placeholder="Поиск фильмов (например, Matrix)..." class="header__input" />
+                    <button v-if="movieStore.searchQuery" type="button" class="header__button--clear" title="Очистить"
+                        @click="movieStore.searchQuery = ''">
+                        ✕
+                    </button>
+                </div>
+
                 <button type="submit" class="header__button">
                     Найти
                 </button>

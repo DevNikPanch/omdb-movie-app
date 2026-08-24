@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { Movie, MovieDetail, SearchResponse } from '../types/movie';
 
 export const useMovieStore = defineStore('movie', () => {
@@ -62,5 +62,26 @@ export const useMovieStore = defineStore('movie', () => {
             isLoading.value = false;
         }
     }
-    return { movies, isLoading, error, searchMovies, fetchMovieById, currentMovie };
+
+    const searchQuery = ref<string>('');
+
+    const filteredMovies = computed(() => {
+        const query = searchQuery.value.trim().toLowerCase();
+
+        if (!query) return movies.value;
+        return movies.value.filter((item) => {
+            return item.Title.toLowerCase().includes(query);
+        });
+    });
+
+    return {
+        movies,
+        isLoading,
+        error,
+        searchMovies,
+        fetchMovieById,
+        currentMovie,
+        searchQuery,
+        filteredMovies,
+    };
 });

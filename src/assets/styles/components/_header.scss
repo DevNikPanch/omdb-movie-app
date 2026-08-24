@@ -1,29 +1,43 @@
-// Импортируем переменные из папки abstract
-@use '../abstract/variables'as *;
+// Переменные для удобства (если не вынесены глобально)
+$color-bg-main: #09090b;
+$color-card-bg: #18181b;
+$color-border: #27272a;
+$color-text-primary: #f4f4f5;
+$color-text-muted: #71717a;
+$color-accent: #2563eb;
+$color-accent-hover: #1d4ed8;
 
 .header {
-    background-color: $color-bg-header;
+    background-color: rgba(9, 9, 11, 0.8);
+    backdrop-filter: blur(12px); // Эффект размытия при скролле
     border-bottom: 1px solid $color-border;
-    padding: 16px 0;
     position: sticky;
     top: 0;
     z-index: 100;
+    padding: 16px 0;
 
     &__container {
-        max-width: $container-max-width;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 0 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
+        gap: 24px;
+
+        @media (max-width: 640px) {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+        }
     }
 
     &__logo {
-        font-size: 1.8rem;
-        color: $color-text-main;
-        margin: 0;
+        font-size: 1.5rem;
         font-weight: 800;
+        color: #ffffff;
+        margin: 0;
+        letter-spacing: -0.5px;
 
         span {
             color: $color-accent;
@@ -32,38 +46,75 @@
 
     &__search {
         display: flex;
-        gap: 10px;
-        width: 100%;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
         max-width: 480px;
+
+        // Обертка для инпута и крестика
+        &-field {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
     }
 
     &__input {
-        flex-grow: 1;
-        padding: 10px 16px;
+        width: 100%;
+        background-color: $color-card-bg;
+        border: 1px solid $color-border;
         border-radius: 8px;
-        border: 1px solid #3f3f46;
-        background-color: #18181b;
-        color: $color-text-main;
+        padding: 10px 40px 10px 14px; // Справа отступ под крестик (40px)
+        color: $color-text-primary;
         font-size: 0.95rem;
         outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+        &::placeholder {
+            color: $color-text-muted;
+        }
 
         &:focus {
             border-color: $color-accent;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
         }
     }
 
     &__button {
-        padding: 10px 20px;
         background-color: $color-accent;
-        color: $color-text-main;
+        color: #ffffff;
         border: none;
         border-radius: 8px;
-        font-weight: 600;
+        padding: 10px 20px;
         font-size: 0.95rem;
+        font-weight: 500;
         cursor: pointer;
+        transition: background-color 0.2s ease;
+        white-space: nowrap;
 
         &:hover {
             background-color: $color-accent-hover;
+        }
+
+        // Стилизация иконки/кнопки очистки (крестика)
+        &--clear {
+            position: absolute;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: $color-text-muted;
+            padding: 4px 8px;
+            font-size: 1.1rem;
+            line-height: 1;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: color 0.2s ease, background-color 0.2s ease;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: $color-text-primary;
+            }
         }
     }
 }
