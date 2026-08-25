@@ -1,28 +1,29 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { Movie } from '../types/movie';
+import { useFavoritesStore } from '../stores/useFavoritesStore';
 
 const props = defineProps<{
-    movie: Movie
+    movie: Movie;
 }>();
 
-const posterUrl = computed(() => {
-    return props.movie.Poster !== 'N/A' ? props.movie.Poster : 'https://via.placeholder.com/300x450?text=No+Poster'
-})
+const favoritesStore = useFavoritesStore();
 </script>
+
 <template>
-    <RouterLink :to="{ name: 'movie-detail', params: { id: movie.imdbID } }" class="movie-card">
-        <div class="movie-card__container">
-            <div class="movie-card__poster">
-                <img class="movie-card__img" :src="posterUrl" :alt="movie.Title">
-            </div>
-            <div class="movie-card__info">
-                <h3 class="movie-card__title">{{ movie.Title }}</h3>
-                <div class="movie-card__meta">
-                    <span class="movie-card__year">{{ movie.Year }}</span>
-                    <span class="movie-card__type">{{ movie.Type }}</span>
-                </div>
-            </div>
+    <div class="movie-card">
+        <RouterLink :to="`/movie/${props.movie.imdbID}`" class="movie-card__link">
+            <img :src="props.movie.Poster" :alt="props.movie.Title" class="movie-card__poster" />
+            <h3 class="movie-card__title">{{ props.movie.Title }}</h3>
+        </RouterLink>
+
+        <div class="movie-card__footer">
+            <span class="movie-card__year">{{ props.movie.Year }}</span>
+
+            <button type="button" class="movie-card__favorite-btn"
+                :class="{ 'movie-card__favorite-btn--active': favoritesStore.isFavorite(props.movie.imdbID) }"
+                title="Добавить в избранное" @click.stop="favoritesStore.toggleFavorite(props.movie)">
+                ♥
+            </button>
         </div>
-    </RouterLink>
+    </div>
 </template>

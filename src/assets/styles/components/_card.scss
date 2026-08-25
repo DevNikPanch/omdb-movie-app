@@ -46,6 +46,11 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
+    &__link {
+        text-decoration: none;
+        color: inherit;
+    }
+
     &__poster {
         width: 100%;
         aspect-ratio: 2 / 3;
@@ -92,5 +97,37 @@
         background-color: #2d3748;
         padding: 0.2rem 0.5rem;
         border-radius: 4px;
+    }
+
+    &__favorite-btn {
+        background: transparent;
+        border: 1px solid #27272a;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        color: #71717a; // Серый цвет по умолчанию
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        // Класс, который навешивается динамически
+        &--active {
+            background-color: #ef4444;
+            border-color: #ef4444;
+            color: #ffffff;
+
+            &:hover {
+                background-color: #dc2626;
+                color: #ffffff;
+            }
+        }
     }
 }
