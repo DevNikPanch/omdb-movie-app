@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useMovieStore } from '../stores/useMovieStore';
+import { useFavoritesStore } from '../stores/useFavoritesStore';
 
 const movieStore = useMovieStore();
+const favoritesStore = useFavoritesStore();
 
 const handleSearch = () => {
     movieStore.searchMovies(movieStore.searchQuery);
@@ -12,7 +14,16 @@ const handleSearch = () => {
 <template>
     <header class="header">
         <div class="header__container">
-            <h1 class="header__logo">Film<span>Hub</span></h1>
+            <RouterLink to="/" class="header__link">
+                <h1 class="header__logo">Film<span>Hub</span></h1>
+            </RouterLink>
+
+            <RouterLink to="/favorites" class="header__favorites">
+                <span class="header__favorites-text">Избранное</span>
+                <span v-if="favoritesStore.countFavoritesMovies" class="header__counter">
+                    {{ favoritesStore.countFavoritesMovies }}
+                </span>
+            </RouterLink>
 
             <form class="header__search" @submit.prevent="handleSearch">
                 <div class="header__search-field">

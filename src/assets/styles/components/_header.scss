@@ -32,6 +32,11 @@ $color-accent-hover: #1d4ed8;
         }
     }
 
+    &__link {
+        text-decoration: none;
+        color: inherit;
+    }
+
     &__logo {
         font-size: 1.5rem;
         font-weight: 800;
@@ -42,6 +47,37 @@ $color-accent-hover: #1d4ed8;
         span {
             color: $color-accent;
         }
+    }
+
+    &__favorites {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: #e4e4e7;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 6px 12px;
+        border-radius: 8px;
+        background-color: #27272a;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: #3f3f46;
+            color: #ffffff;
+        }
+    }
+
+    &__counter {
+        background-color: #ef4444;
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1;
+        padding: 3px 7px;
+        border-radius: 9999px;
+        min-width: 18px;
+        text-align: center;
     }
 
     &__search {

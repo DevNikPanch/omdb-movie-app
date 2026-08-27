@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import type { Movie } from '../types/movie';
 
 export const useFavoritesStore = defineStore('favorites', () => {
@@ -31,5 +31,9 @@ export const useFavoritesStore = defineStore('favorites', () => {
         }
     };
 
-    return { favoritesMovies, isFavorite, toggleFavorite };
+    const countFavoritesMovies = computed(() => {
+        return favoritesMovies.value.length;
+    });
+
+    return { favoritesMovies, isFavorite, toggleFavorite, countFavoritesMovies };
 });
