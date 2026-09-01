@@ -9,4 +9,5 @@
 @use './components/card';
 
 // 4. Отображения
-@use './views/movie-detail'
+@use './views/movie-detail';
+@use './views/favorites';
